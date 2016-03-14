@@ -1,9 +1,12 @@
 class Currency
-  def initialize(string)
-    split_money = string.split("")
-    @symbol = split_money.shift
-    @amount = split_money.join("").to_f
-    symbol_map = {"$" => :USD, "£" => :EUR, "¥" => :JPY}
+  def initialize(currency_string)
+    split_currency = currency_string.split("")           
+    @symbol = split_currency.shift
+    @amount = split_currency.join("").to_f
+  end
+
+  def symbol
+    symbol_hash = {"$" => :USD, "£" => :EUR, "¥" => :JPY}
     @currency_code = symbol_map[@symbol]
   end
 
@@ -15,15 +18,11 @@ class Currency
     @amount
   end
 
-  def symbol
-    @symbol
-  end
-
   def to_s
     "#{@symbol}#{@amount}"
   end
 end
 
 Currency.new("$1.00")
-Currency.new()
-Currency.new()
+Currency.new("£0.74")
+Currency.new("¥120.0")
