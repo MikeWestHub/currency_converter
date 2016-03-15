@@ -3,7 +3,7 @@ require_relative "currency_converter"
 
 
 c1 = Currency.new("¥120.00")
-c2 = Currency.new("¥1,000.00")
+c2 = Currency.new("¥240.00")
 
 currency_total = c1.to_f + c2.to_f
 puts currency_total
