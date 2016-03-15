@@ -8,19 +8,25 @@ class CurrenyConversion
 
   def dollar
       if :EUR
+        euro = @amount / 0.74
       elsif :YEN
+        yen = 
       else
   end
 
   def euro
     if :USD
+      dollar = @amount * 0.74
     elsif :YEN
+      yen = @amount *
     else
   end
 
   def yen
     if :USD
+      dollar =
     elsif :EUR
+      euro =
     else
   end
 
