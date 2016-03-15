@@ -1,26 +1,41 @@
 class Currency
+  attr_reader :symbol, :amount
   def initialize(currency_string)
     split_currency = currency_string.chars
     @symbol = split_currency.shift
-    @amount = split_currency.join
+    @amount = split_currency.join("").to_f
   end
 
-  def to_f
-    @amount.to_f
+  def currency_code
+    currency_array = { "$" => :USD, "£" => :EUR, "¥" => :YEN}
+    currency_code = currency_array[@symbol]
   end
 
-  def to_s
-    amount_f = @amount.to_f
-    "#{@symbol}#{amount_f}"
+  def +(other)
+    new_value = @amount + other.amount
+    Currency.new("#{@symbol}#{new_value}")
+  end
+
+  def -(other)
+    new_value = @amount - other.amount
+    Currency.new("#{@symbol}#{new_value}")
+  end
+
+  def *(other)
+
   end
 end
 
-#examples below for class creation and format for addition
+class UnknownCurrencyCodeError < StandardError
+end
 
-c1 = Currency.new("$13.00")
-c2 = Currency.new("$10.00")
-c3 = Currency.new("$120.00")
+class DifferentCurrencyCodeError <StandardError
+end
 
-currency_instance_total= c1.to_f + c2.to_f + c3.to_f
-puts currency_instance_total.to_s
-puts [c1, c2, c3]
+c1 = Currency.new("$23.00")
+c2 = Currency.new("$2.00")
+
+c1.amount
+c2.amount
+sum = c1.-(c2)
+p sum
