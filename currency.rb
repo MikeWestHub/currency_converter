@@ -25,7 +25,8 @@ class Currency
   end
 
   def *(other)
-    @amount * other.to_f
+    mult_value = @amount * other.to_f
+    Currency.new("#{@symbol}#{mult_value}")
   end
 
   def ==(other)
@@ -48,5 +49,5 @@ end
 class UnknownCurrencyCodeError < StandardError
 end
 
-class DifferentCurrencyCodeError <StandardError
+class DifferentCurrencyCodeError < StandardError
 end
