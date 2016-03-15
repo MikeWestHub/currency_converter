@@ -4,6 +4,7 @@ class Currency
     split_currency = currency_string.chars
     @symbol = split_currency.shift
     @amount = split_currency.join("").to_f
+    known_currency
   end
 
   def currency_code
@@ -12,17 +13,31 @@ class Currency
   end
 
   def +(other)
+    check_type(other.symbol)
     new_value = @amount + other.amount
     Currency.new("#{@symbol}#{new_value}")
   end
 
   def -(other)
+    check_type(other.symbol)
     new_value = @amount - other.amount
     Currency.new("#{@symbol}#{new_value}")
   end
 
   def *(other)
+    @amount * other.to_f
+  end
 
+  def check_type(symbol)
+    if @symbol != symbol
+      raise DifferentCurrencyCodeError, "These currencies cannot be combined."
+    end
+  end
+
+  def known_currency
+    unless [ "$", "£", "¥" ].include?(symbol)
+      raise UnknownCurrencyCodeError, "This currency is not accepted."
+    end
   end
 end
 
@@ -31,11 +46,3 @@ end
 
 class DifferentCurrencyCodeError <StandardError
 end
-
-c1 = Currency.new("$23.00")
-c2 = Currency.new("$2.00")
-
-c1.amount
-c2.amount
-sum = c1.-(c2)
-p sum
