@@ -10,7 +10,7 @@ class Currency
   end
 
   def currency_code
-    currency_array = { "$" => :USD, "£" => :EUR, "¥" => :YEN}
+    currency_array = { "$" => :USD, "£" => :EUR, "¥" => :JPY}
     currency_code = currency_array[@symbol]
   end
 
