@@ -1,38 +1,25 @@
+require_relative "currency"  # => true
+require_relative "error_classes"
+
 class CurrenyConversion
+  attr_reader :conversion_hash          # => nil
+  def initialize(conversion_hash)
+    @conversion_hash = conversion_hash  # => {:USD=>1.0, :EUR=>0.74, :JPY=>120.0}, "£20.27027027027027"
+  end                                   # => :initialize
 
-  def initialize()
-    @symbol = symbol
-    @amount = amount
-    @currency = currency
-  end
+  def convert(currency_obj, currency_code)
+      new_currency = currency_obj.amount/conversion_hash[currency_code]  # => 20.27027027027027
+      symbol_map = {:USD => "$", :EUR => "£", :JPY => "¥"}               # => {:USD=>"$", :EUR=>"£", :JPY=>"¥"}
+      symbol = symbol_map[currency_code]                                 # => "£"
+      CurrenyConversion.new("#{symbol}#{new_currency}")                  # => #<CurrenyConversion:0x007f852a0093b0 @conversion_hash="£20.27027027027027">
+  end                                                                    # => :convert
+end                                                                      # => :convert
 
-  # def dollar
-  #     if :EUR
-  #       euro = @amount / 0.74
-  #     elsif :YEN
-  #       yen =
-  #     else
-  # end
-  #
-  # def euro
-  #   if :USD
-  #     dollar = @amount * 0.74
-  #   elsif :YEN
-  #     yen = @amount *
-  #   else
-  # end
-  #
-  # def yen
-  #   if :USD
-  #     dollar =
-  #   elsif :EUR
-  #     euro =
-  #   else
-  # end
+c1 = Currency.new("$15.00")  # => #<Currency:0x007f852a010a98 @symbol="$", @amount=15.0>
 
-  def conversion_rate
-    @counversion_rate = conversion_rate
-    conversion_rate = {:USD => 1.00, :EUR => 0.74, :JPY => 120.0}
-  end
 
-end
+  # => {:USD=>1.0, :EUR=>0.74, :JPY=>120.0}
+
+convert_hash = CurrenyConversion.new(hash)  # => #<CurrenyConversion:0x007f852a00a1c0 @conversion_hash={:USD=>1.0, :EUR=>0.74, :JPY=>120.0}>
+
+new_amt = convert_hash.convert(c1, :EUR)  # => #<CurrenyConversion:0x007f852a0093b0 @conversion_hash="£20.27027027027027">

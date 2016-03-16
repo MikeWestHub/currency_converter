@@ -1,3 +1,5 @@
+require_relative "error_classes"
+
 class Currency
   attr_reader :symbol, :amount
   def initialize(currency_string)
@@ -25,8 +27,8 @@ class Currency
   end
 
   def *(other)
-    mult_value = @amount * other.to_f
-    Currency.new("#{@symbol}#{mult_value}")
+    new_value = @amount * other.to_f
+    Currency.new("#{@symbol}#{new_value}")
   end
 
   def ==(other)
@@ -44,10 +46,4 @@ class Currency
       raise UnknownCurrencyCodeError, "This currency is not accepted."
     end
   end
-end
-
-class UnknownCurrencyCodeError < StandardError
-end
-
-class DifferentCurrencyCodeError < StandardError
 end
