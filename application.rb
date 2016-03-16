@@ -15,14 +15,19 @@ c1_usd + c2_usd + c3_usd
 c2_usd - c1_usd
 c2_usd * 3.0
 
-
-convert_obj = CurrencyConversion.new(conversion_hash)
+#Conversions
+conversion_obj = CurrencyConversion.new(conversion_hash)
 #USD to *
-convert_obj.convert(c1_usd, :EUR)
-convert_obj.convert(c1_usd, :JPY)
+conversion_obj.convert(c1_usd, :EUR)
+conversion_obj.convert(c1_usd, :JPY)
 #EUR to *
-convert_obj.convert(c4_eur, :USD)
-convert_obj.convert(c4_eur, :JPY)
+conversion_obj.convert(c4_eur, :USD)
+conversion_obj.convert(c4_eur, :JPY)
 #JPY to *
-convert_obj.convert(c5_jpy, :USD)
-convert_obj.convert(c5_jpy, :EUR)
+conversion_obj.convert(c5_jpy, :USD)
+conversion_obj.convert(c5_jpy, :EUR)
+
+#Errors
+Currency.new("&40.00")
+c1_usd + c4_eur
+convert_obj.convert(c1_usd, :YEN)
