@@ -10,8 +10,8 @@ class Currency
   end
 
   def currency_code
-    currency_array = { "$" => :USD, "£" => :EUR, "¥" => :JPY}
-    currency_code = currency_array[@symbol]
+    currency_hash = { "$" => :USD, "£" => :EUR, "¥" => :JPY}
+    currency_code = currency_hash[@symbol]
   end
 
   def +(other)
